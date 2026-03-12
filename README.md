@@ -25,3 +25,21 @@ Depois:
 ## Objetivo
 
 Ajudar estudantes a estudar melhor e tornar o estudo mais fácil e divertido.
+async function perguntarIA(pergunta){
+
+let resposta = await fetch("https://api.openai.com/v1/chat/completions",{
+method:"POST",
+headers:{
+"Content-Type":"application/json",
+"Authorization":"Bearer A_TUA_CHAVE_API"
+},
+body: JSON.stringify({
+model:"gpt-4o-mini",
+messages:[{role:"user",content:pergunta}]
+})
+})
+
+let dados = await resposta.json()
+
+return dados.choices[0].message.content
+}
